@@ -296,12 +296,15 @@ class _LogInScreenState extends State<LogInScreen> {
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(100)),
                                           gradient: BtnTeal),
-                                      child: Material( 
-                                        color: Colors.teal,
-                                        elevation: 0,
-                                        borderRadius: (BorderRadius.circular(100)),
-                                        
+                                      child: Material(
+                                        color: Colors.transparent,
                                         child: InkWell(
+                                          borderRadius:
+                                              (BorderRadius.circular(100)),
+                                          onTap: () {},
+                                          highlightColor:
+                                              const Color(0xFF63DCA0),
+                                          splashColor:const Color(0xFF40A1A8),
                                           child: Center(
                                             child: Text(
                                               "LOG IN",
