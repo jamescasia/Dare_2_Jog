@@ -5,11 +5,12 @@ class ReactiveButton extends StatefulWidget {
   Function onTaps;
   String label;
   Color highlightColor, splashColor;
-  double width, height, shadowHeight, borderRadius;
+  double width, height, shadowHeight, borderRadius, fontSize;
 
   ReactiveButton(
       {Key key,
       @required this.onTaps,
+      @required this.fontSize,
       @required this.label,
       @required this.bgGradient,
       @required this.width,
@@ -21,6 +22,7 @@ class ReactiveButton extends StatefulWidget {
       : super(key: key);
   @override
   _ReactiveButtonState createState() => new _ReactiveButtonState(
+      fontSize:this.fontSize,
       label: this.label,
       onTaps: this.onTaps,
       bgGradient: this.bgGradient,
@@ -38,11 +40,12 @@ class _ReactiveButtonState extends State<ReactiveButton> {
   String label;
   Function onTaps;
   Color highlightColor, splashColor;
-  double width, height, shadowHeight, borderRadius, btnScale = 1;
+  double width, height, shadowHeight, borderRadius, btnScale = 1, fontSize;
 
   _ReactiveButtonState(
       {Key key,
       @required this.onTaps,
+      @required this.fontSize,
       @required this.bgGradient,
       @required this.width,
       @required this.label,
@@ -105,7 +108,7 @@ class _ReactiveButtonState extends State<ReactiveButton> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
-                    fontSize: 21,
+                    fontSize:fontSize,
                   ),
                 ),
               ),
