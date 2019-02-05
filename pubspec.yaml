@@ -38,6 +38,7 @@ flutter:
     - assets/icons/share_icon.png
     - assets/icons/swear_icon.png
     - assets/icons/user_icon.png
+    - assets/icons/lock_icon.png
   fonts:
     - family: Varela
       fonts:

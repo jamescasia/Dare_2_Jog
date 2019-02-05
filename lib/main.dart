@@ -126,7 +126,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             bottom: 18, right: 15, left: 15),
                         child: Container(
                           width: double.infinity,
-                          height: 116,
+                          height: 95,
                           decoration: BoxDecoration(
                               boxShadow: [
                                 new BoxShadow(
@@ -148,7 +148,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             children: <Widget>[
                               Container(
                                   width: double.infinity,
-                                  height: 57,
+                                  height: 47,
                                   child: Flex(
                                     direction: Axis.horizontal,
                                     children: <Widget>[
@@ -162,7 +162,6 @@ class _LogInScreenState extends State<LogInScreen> {
                                         ),
                                       ),
                                       Expanded(
-                                        flex: 2,
                                         child: Padding(
                                           padding:
                                               const EdgeInsets.only(left: 18),
@@ -175,7 +174,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                             },
                                             style: TextStyle(
                                               color: Colors.grey,
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               fontFamily: 'Varela',
                                             ),
                                             decoration: InputDecoration(
@@ -183,7 +182,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                                 hintStyle: TextStyle(
                                                   fontFamily: 'Varela',
                                                   color: Colors.grey[400],
-                                                  fontSize: 20,
+                                                  fontSize: 18,
                                                 ),
                                                 hintText: 'email'),
                                           ),
@@ -193,53 +192,104 @@ class _LogInScreenState extends State<LogInScreen> {
                                   )),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 8, right: 8),
+                                    const EdgeInsets.only(left: 14, right: 14),
                                 child: Container(
                                   height: 1,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(100)),
-                                      boxShadow: [
-                                        new BoxShadow(
-                                          blurRadius: 2,
-                                          color: Colors.grey[300],
-                                          offset: new Offset(0, 0),
-                                        ),
-                                      ]),
+                                  color: Colors.grey[300], 
                                 ),
                               ),
                               Container(
-                                width: double.infinity,
-                                height: 57,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 35, top: 4),
-                                  child: TextField(
-                                    controller: _pass_controller,
-                                    onSubmitted: (content) { 
-                                      returnScreen();
-                                    },
-                                    textInputAction: TextInputAction.done,
-                                    onTap: () {
-                                      adjustScreen();
-                                    },
-                                    obscureText: true,
-                                    style: TextStyle(
-                                      fontFamily: 'Varela',
-                                      color: Colors.grey,
-                                      fontSize: 20,
-                                    ),
-                                    decoration: InputDecoration(
-                                        border: InputBorder.none,
-                                        hintStyle: TextStyle(
-                                          fontFamily: 'Varela',
-                                          color: Colors.grey[400],
-                                          fontSize: 20,
+                                  width: double.infinity,
+                                  height: 47,
+                                  child: Flex(
+                                    direction: Axis.horizontal,
+                                    children: <Widget>[
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 18),
+                                        child: Image.asset(
+                                          'assets/icons/lock_icon.png',
+                                          fit: BoxFit.cover,
+                                          width: 25,
                                         ),
-                                        hintText: 'password'),
-                                  ),
-                                ),
-                              )
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 18),
+                                          child: TextField(
+                                            controller: _pass_controller,
+                                            textInputAction:
+                                                TextInputAction.done,
+                                            onTap: () {
+                                              adjustScreen();
+                                            },
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 18,
+                                              fontFamily: 'Varela',
+                                            ),
+                                            decoration: InputDecoration(
+                                                border: InputBorder.none,
+                                                hintStyle: TextStyle(
+                                                  fontFamily: 'Varela',
+                                                  color: Colors.grey[400],
+                                                  fontSize: 18,
+                                                ),
+                                                hintText: 'password'),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )),
+                              // Container(
+                              //   width: double.infinity,
+                              //   height: 47,
+                              //   child: Padding(
+                              //     padding:
+                              //         const EdgeInsets.only(left: 18),
+                              //     child: Flex(
+                              //         direction: Axis.horizontal,
+                              //         children: <Widget>[
+                              //           Padding(
+                              //             padding:
+                              //                 const EdgeInsets.only(left: 18),
+                              //             child: Image.asset(
+                              //               'assets/icons/user_icon.png',
+                              //               fit: BoxFit.cover,
+                              //               width: 25,
+                              //             ),
+                              //           ),
+                              //           Expanded(
+                              //             child: TextField(
+                              //               controller: _pass_controller,
+                              //               onSubmitted: (content) {
+                              //                 returnScreen();
+                              //               },
+                              //               textInputAction:
+                              //                   TextInputAction.done,
+                              //               onTap: () {
+                              //                 adjustScreen();
+                              //               },
+                              //               obscureText: true,
+                              //               style: TextStyle(
+                              //                 fontFamily: 'Varela',
+                              //                 color: Colors.grey,
+                              //                 fontSize: 18,
+                              //               ),
+                              //               decoration: InputDecoration(
+                              //                   border: InputBorder.none,
+                              //                   hintStyle: TextStyle(
+                              //                     fontFamily: 'Varela',
+                              //                     color: Colors.grey[400],
+                              //                     fontSize: 18,
+                              //                   ),
+                              //                   hintText: 'password'),
+                              //             ),
+                              //           ),
+                              //         ]),
+                              //   ),
+                              // )
                             ],
                           ),
                         ),
