@@ -3,29 +3,22 @@ import 'package:flutter/services.dart';
 import 'main.dart';
 import 'reactiveButton.dart';
 
-class LogInScreen {
-  double btnHeight = 5;
-  double btnScale = 1;
-  
-  int s = 0;
-  double hangTabHeight = double.infinity;
+class setGoalUpper extends StatefulWidget {
+  @override
+  _setGoalUpperState createState() => new _setGoalUpperState();
+}
 
-  final _email_controller = TextEditingController();
-  final _pass_controller = TextEditingController();
-  final _email_focus = FocusNode();
-  final _pass_focus = FocusNode();
 
-  void logIn() { 
-    print(_email_controller.text);
-    print(_pass_controller.text);
-    logInSuccessful();
-  }
+class SetGoal{
+final _kms_controller = TextEditingController();
+final _days_controller = TextEditingController();
+final _when_controller = TextEditingController();
 
-  void logInSuccessful() {
-    returnScreen();
-  }
+final _kms_focus = FocusNode();
+final _days_focus = FocusNode();
+final _when_focus = FocusNode();
 
-  void returnScreen(){
+void returnScreen(){
     home.returnScreen(2, 1);
 
   }
@@ -34,20 +27,12 @@ class LogInScreen {
 
 
   }
-
-  
 }
 
-LogInScreen logInScreen = LogInScreen();
+SetGoal setGoal = SetGoal();
 
-class logInScreenUpper extends StatefulWidget {
-  @override
-  _logInScreenUpperState createState() => new _logInScreenUpperState();
-}
 
-class _logInScreenUpperState extends State<logInScreenUpper> {
-
-  
+class _setGoalUpperState extends State<setGoalUpper> {
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -55,14 +40,14 @@ class _logInScreenUpperState extends State<logInScreenUpper> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Image.asset(
-            'assets/icons/jog_icon.png',
+            'assets/icons/plan_icon.png',
             fit: BoxFit.cover,
             width: 60,
           ),
           Padding(
             padding: const EdgeInsets.only(bottom: 30, top: 25),
             child: Text(
-              "Log in to your\nDare2Jog account",
+              "Set a RUNNING goal.\nPAY if you fail to reach it.",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 25,
@@ -75,7 +60,7 @@ class _logInScreenUpperState extends State<logInScreenUpper> {
             padding: const EdgeInsets.only(bottom: 18, right: 15, left: 15),
             child: Container(
               width: double.infinity,
-              height: 95,
+              height: 143,
               decoration: BoxDecoration(
                   boxShadow: [
                     new BoxShadow(
@@ -103,7 +88,7 @@ class _logInScreenUpperState extends State<logInScreenUpper> {
                           Padding(
                             padding: const EdgeInsets.only(left: 24),
                             child: Image.asset(
-                              'assets/icons/user_icon.png',
+                              'assets/icons/dart_icon.png',
                               fit: BoxFit.cover,
                               width: 25,
                             ),
@@ -112,16 +97,16 @@ class _logInScreenUpperState extends State<logInScreenUpper> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 18),
                               child: TextField(
-                                focusNode: logInScreen._email_focus,
+                                focusNode: setGoal._kms_focus,
                                 autofocus: true,
                                 onSubmitted: (content) {
                                   FocusScope.of(context)
-                                      .requestFocus(logInScreen._pass_focus);
+                                      .requestFocus(setGoal._days_focus);
                                 },
-                                controller: logInScreen._email_controller,
+                                controller: setGoal._kms_controller,
                                 textInputAction: TextInputAction.next,
                                 onTap: () {
-                                  logInScreen.adjustScreen();
+                                  setGoal.adjustScreen();
                                 },
                                 style: TextStyle(
                                   color: Colors.grey,
@@ -135,7 +120,7 @@ class _logInScreenUpperState extends State<logInScreenUpper> {
                                       color: Colors.grey[400],
                                       fontSize: 16,
                                     ),
-                                    hintText: 'email'),
+                                    hintText: 'How many kilometres?'),
                               ),
                             ),
                           )
@@ -153,29 +138,22 @@ class _logInScreenUpperState extends State<logInScreenUpper> {
                       height: 47,
                       child: Flex(
                         direction: Axis.horizontal,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(left: 27),
-                            child: Image.asset(
-                              'assets/icons/lock_icon.png',
-                              fit: BoxFit.cover,
-                              width: 18,
-                            ),
-                          ),
+                        children: <Widget>[ 
                           Expanded(
                             child: Padding(
                               padding: const EdgeInsets.only(left: 18),
                               child: TextField(
-                                focusNode: logInScreen._pass_focus,
+                                focusNode: setGoal._days_focus,
                                 autofocus: true,
                                 onSubmitted: (content) {
-                                  logInScreen.returnScreen();
+                                  FocusScope.of(context)
+                                      .requestFocus(setGoal._when_focus);
                                 },
                                 obscureText: true,
-                                controller: logInScreen._pass_controller,
+                                controller: setGoal._days_controller,
                                 textInputAction: TextInputAction.done,
                                 onTap: () {
-                                  logInScreen.adjustScreen();
+                                  setGoal.adjustScreen();
                                 },
                                 style: TextStyle(
                                   color: Colors.grey,
@@ -189,7 +167,53 @@ class _logInScreenUpperState extends State<logInScreenUpper> {
                                       color: Colors.grey[400],
                                       fontSize: 16,
                                     ),
-                                    hintText: 'password'),
+                                    hintText: 'Which days? (Optional)'),
+                              ),
+                            ),
+                          )
+                        ],
+                      )),
+                      Padding(
+                    padding: const EdgeInsets.only(left: 21, right: 21),
+                    child: Container(
+                      height: 1,
+                      color: Colors.grey[300],
+                    ),
+                  ),
+                  Container(
+                      width: double.infinity,
+                      height: 47,
+                      child: Flex(
+                        direction: Axis.horizontal,
+                        children: <Widget>[ 
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 18),
+                              child: TextField(
+                                focusNode: setGoal._when_focus,
+                                autofocus: true,
+                                onSubmitted: (content) {
+                                  setGoal.returnScreen();
+                                },
+                                obscureText: true,
+                                controller: setGoal._when_controller,
+                                textInputAction: TextInputAction.done,
+                                onTap: () {
+                                  setGoal.adjustScreen();
+                                },
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 16,
+                                  fontFamily: 'Varela',
+                                ),
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(
+                                      fontFamily: 'Varela',
+                                      color: Colors.grey[400],
+                                      fontSize: 16,
+                                    ),
+                                    hintText: 'Until when?'),
                               ),
                             ),
                           )
@@ -205,79 +229,14 @@ class _logInScreenUpperState extends State<logInScreenUpper> {
   }
 }
 
-class logInScreenLower extends StatefulWidget {
+class setGoalLower extends StatefulWidget {
   @override
-  _logInScreenLowerState createState() => new _logInScreenLowerState();
+  _setGoalLowerState createState() => new _setGoalLowerState();
 }
 
-class _logInScreenLowerState extends State<logInScreenLower> {
+class _setGoalLowerState extends State<setGoalLower> {
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      child: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Text("Don't have an account?",
-                    style: TextStyle(
-                      fontFamily: 'Varela',
-                      color: Colors.grey[500],
-                      fontSize: 14,
-                    )),
-                Padding(
-                  padding: const EdgeInsets.only(top: 2.5),
-                  child: InkWell(
-                    highlightColor: Colors.transparent,
-                    splashColor: Colors.transparent,
-                    onTap: () {
-                      print('create account now');
-                    },
-                    child: Text("CREATE NOW",
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontFamily: 'Varela',
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey[500],
-                          fontSize: 14,
-                        )),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 50),
-                      child: ReactiveButton(
-                        onTaps: () { 
-                          logInScreen.logIn();
-                        },
-                        height: 55,
-                        width: 165,
-                        bgGradient: BtnTeal,
-                        fontSize: 18,
-                        shadowHeight: 3,
-                        label: "LOG IN",
-                        borderRadius: 100,
-                        highlightColor: const Color(0xFF63DCA0),
-                        splashColor: const Color(0xFF40A1A8),
-                      ),
-                    ),
-                  ]),
-            ),
-          )
-        ],
-      ),
-      // color: Colors.red,
-    );
+    return new Container();
   }
 }
