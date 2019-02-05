@@ -54,13 +54,34 @@ int weight_of_lower = 1;
 int s = 0;
 
 class _LogInScreenState extends State<LogInScreen> {
+  final _email_controller = TextEditingController();
+  final _pass_controller = TextEditingController();
+
+  void logIn() {
+    returnScreen();
+    print(_email_controller.text);
+    print(_pass_controller.text);
+  }
+
   @override
+  void adjustScreen() {
+    weight_of_upper = -1;
+    weight_of_lower = 1;
+    setState(() {});
+  }
+
+  void returnScreen() {
+    setState(() {});
+    weight_of_upper = 2;
+    weight_of_lower = 1;
+  }
+
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
       statusBarColor: const Color(0xFF63DCA0),
     ));
     return new Scaffold(
-      resizeToAvoidBottomPadding: true,
+      resizeToAvoidBottomPadding: false,
       body: Container(
         // padding: EdgeInsets.only(bottom:),
         height: MediaQuery.of(context).size.height,
@@ -145,10 +166,11 @@ class _LogInScreenState extends State<LogInScreen> {
                                           padding:
                                               const EdgeInsets.only(left: 18),
                                           child: TextField(
+                                            controller: _email_controller,
+                                            textInputAction:
+                                                TextInputAction.next,
                                             onTap: () {
-                                              weight_of_upper = -1;
-                                              weight_of_lower = 1;
-                                              setState(() {});
+                                              adjustScreen();
                                             },
                                             style: TextStyle(
                                               color: Colors.grey,
@@ -192,10 +214,13 @@ class _LogInScreenState extends State<LogInScreen> {
                                   padding:
                                       const EdgeInsets.only(left: 35, top: 4),
                                   child: TextField(
+                                    controller: _pass_controller,
+                                    onSubmitted: (content) { 
+                                      returnScreen();
+                                    },
+                                    textInputAction: TextInputAction.done,
                                     onTap: () {
-                                      weight_of_upper = 0;
-                                      setState(() {});
-                                      print('adfaf');
+                                      adjustScreen();
                                     },
                                     obscureText: true,
                                     style: TextStyle(
@@ -248,7 +273,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               onTap: () {
                                 print('create account nodw');
                               },
-                              child: Text("CREATE NOW" ,
+                              child: Text("CREATE NOW",
                                   style: TextStyle(
                                     decoration: TextDecoration.underline,
                                     fontFamily: 'Varela',
@@ -272,15 +297,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 padding: const EdgeInsets.only(bottom: 50),
                                 child: ReactiveButton(
                                   onTaps: () {
-                                    
-                                    setState(() {});
-                                    print('wtf');
-                                    weight_of_upper = 2;
-                                    weight_of_lower = 1;
-                                    
-                                    s++;
-                                    
-
+                                    logIn();
                                   },
                                   height: 62,
                                   width: 190,
