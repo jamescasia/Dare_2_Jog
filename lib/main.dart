@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'reactiveButton.dart';
+import 'GreenSquares.dart';
 
 LinearGradient teal = LinearGradient(
   begin: Alignment.topRight,
@@ -47,6 +49,7 @@ class LogInScreen extends StatefulWidget {
 
 double btnHeight = 5;
 double btnScale = 1;
+int weight_of_upper = 2;
 
 class _LogInScreenState extends State<LogInScreen> {
   @override
@@ -55,8 +58,9 @@ class _LogInScreenState extends State<LogInScreen> {
       statusBarColor: const Color(0xFF63DCA0),
     ));
     return new Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: true,
       body: Container(
+        // padding: EdgeInsets.only(bottom:),
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         // decoration: BoxDecoration(
@@ -139,6 +143,10 @@ class _LogInScreenState extends State<LogInScreen> {
                                           padding:
                                               const EdgeInsets.only(left: 18),
                                           child: TextField(
+                                            onTap: () {
+                                              weight_of_upper = 0;
+                                              setState(() {});
+                                            },
                                             style: TextStyle(
                                               color: Colors.grey,
                                               fontSize: 20,
@@ -182,6 +190,8 @@ class _LogInScreenState extends State<LogInScreen> {
                                       const EdgeInsets.only(left: 35, top: 4),
                                   child: TextField(
                                     onTap: () {
+                                      weight_of_upper = 0;
+                                      setState(() {});
                                       print('adfaf');
                                     },
                                     obscureText: true,
@@ -209,7 +219,7 @@ class _LogInScreenState extends State<LogInScreen> {
                   ),
                 ),
               ),
-              flex: 2,
+              flex: weight_of_upper,
             ),
             Expanded(
               flex: 1,
@@ -257,68 +267,18 @@ class _LogInScreenState extends State<LogInScreen> {
                             children: <Widget>[
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 50),
-                                child: Transform.scale(
-                                  scale: btnScale,
-                                  child: GestureDetector(
-                                    onTapCancel: () {
-                                      setState(() {});
-                                      btnHeight = 5;
-                                      btnScale = 1.0;
-                                    },
-                                    onTapDown: (loc) {
-                                      btnHeight = 0;
-                                      btnScale = 0.99;
-                                      setState(() {});
-                                    },
-                                    onTapUp: (loc) {
-                                      setState(() {});
-                                      btnHeight = 5;
-                                      btnScale = 1.0;
-                                    },
-                                    child: Container(
-                                      width: 190,
-                                      height: 62,
-                                      decoration: BoxDecoration(
-                                          boxShadow: [
-                                            new BoxShadow(
-                                              blurRadius: 4,
-                                              color: Colors.black12,
-                                              offset: new Offset(
-                                                  -btnHeight, btnHeight),
-                                            ),
-                                            new BoxShadow(
-                                              blurRadius: 4,
-                                              color: Colors.black12,
-                                              offset: new Offset(
-                                                  btnHeight, btnHeight),
-                                            )
-                                          ],
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(100)),
-                                          gradient: BtnTeal),
-                                      child: Material(
-                                        color: Colors.transparent,
-                                        child: InkWell(
-                                          borderRadius:
-                                              (BorderRadius.circular(100)),
-                                          onTap: () {},
-                                          highlightColor:
-                                              const Color(0xFF63DCA0),
-                                          splashColor:const Color(0xFF40A1A8),
-                                          child: Center(
-                                            child: Text(
-                                              "LOG IN",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.white,
-                                                fontSize: 21,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                child: ReactiveButton(
+                                  onTaps: () {
+                                    print('wtf');
+                                  },
+                                  height: 62,
+                                  width: 190,
+                                  bgGradient: BtnTeal,
+                                  shadowHeight: 3,
+                                  label: "LOG IN",
+                                  borderRadius: 100,
+                                  highlightColor: const Color(0xFF63DCA0),
+                                  splashColor: const Color(0xFF40A1A8),
                                 ),
                               ),
                             ]),
