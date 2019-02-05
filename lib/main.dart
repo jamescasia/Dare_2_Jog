@@ -116,6 +116,7 @@ class _LogInScreenState extends State<LogInScreen> {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 25,
+                            fontWeight: FontWeight.w100,
                             color: Colors.white,
                           ),
                         ),
@@ -263,7 +264,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               style: TextStyle(
                                 fontFamily: 'Varela',
                                 color: Colors.grey[500],
-                                fontSize: 20,
+                                fontSize: 16,
                               )),
                           Padding(
                             padding: const EdgeInsets.only(top: 2.5),
@@ -279,7 +280,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                     fontFamily: 'Varela',
                                     fontWeight: FontWeight.bold,
                                     color: Colors.grey[500],
-                                    fontSize: 20,
+                                    fontSize: 16,
                                   )),
                             ),
                           ),
