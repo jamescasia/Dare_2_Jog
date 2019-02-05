@@ -45,6 +45,9 @@ class LogInScreen extends StatefulWidget {
   _LogInScreenState createState() => new _LogInScreenState();
 }
 
+double btnHeight = 5;
+double btnScale = 1;
+
 class _LogInScreenState extends State<LogInScreen> {
   @override
   Widget build(BuildContext context) {
@@ -227,6 +230,8 @@ class _LogInScreenState extends State<LogInScreen> {
                           Padding(
                             padding: const EdgeInsets.only(top: 2.5),
                             child: InkWell(
+                              highlightColor: Colors.transparent,
+                              splashColor: Colors.transparent,
                               onTap: () {
                                 print('create account now');
                               },
@@ -243,63 +248,78 @@ class _LogInScreenState extends State<LogInScreen> {
                         ],
                       ),
                     ),
-
-                    // MaterialButton(onPressed: null,
-                    // minWidth: 200,
-                    // elevation: 4,
-                    // color: Colors.red,
-                    // height: 62,)
-                    //     RaisedButton(
-
-                    //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                    //   child: Center(child: Text("LOG IN")),
-                    //   onPressed: null,
-
-                    // )
-                    Container(
-                      height: double.infinity,
-                      child: Column(
-                        
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                        InkWell(
-                          splashColor: Colors.red,
-                          highlightColor: Colors.black,
-                          onTap: () {
-                            print("adf");
-                          },
-                          child: Container(
-                            width: 190,
-                            height: 62,
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  new BoxShadow(
-                                    blurRadius: 4,
-                                    color: Colors.black12,
-                                    offset: new Offset(-3, 3),
+                    Expanded(
+                      child: Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 50),
+                                child: Transform.scale(
+                                  scale: btnScale,
+                                  child: GestureDetector(
+                                    onTapCancel: () {
+                                      setState(() {});
+                                      btnHeight = 5;
+                                      btnScale = 1.0;
+                                    },
+                                    onTapDown: (loc) {
+                                      btnHeight = 0;
+                                      btnScale = 0.99;
+                                      setState(() {});
+                                    },
+                                    onTapUp: (loc) {
+                                      setState(() {});
+                                      btnHeight = 5;
+                                      btnScale = 1.0;
+                                    },
+                                    child: Container(
+                                      width: 190,
+                                      height: 62,
+                                      decoration: BoxDecoration(
+                                          boxShadow: [
+                                            new BoxShadow(
+                                              blurRadius: 4,
+                                              color: Colors.black12,
+                                              offset: new Offset(
+                                                  -btnHeight, btnHeight),
+                                            ),
+                                            new BoxShadow(
+                                              blurRadius: 4,
+                                              color: Colors.black12,
+                                              offset: new Offset(
+                                                  btnHeight, btnHeight),
+                                            )
+                                          ],
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(100)),
+                                          gradient: BtnTeal),
+                                      child: Material( 
+                                        color: Colors.teal,
+                                        elevation: 0,
+                                        borderRadius: (BorderRadius.circular(100)),
+                                        
+                                        child: InkWell(
+                                          child: Center(
+                                            child: Text(
+                                              "LOG IN",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                                fontSize: 21,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                  new BoxShadow(
-                                    blurRadius: 4,
-                                    color: Colors.black12,
-                                    offset: new Offset(3, 3),
-                                  )
-                                ],
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100)),
-                                gradient: BtnTeal),
-                            child: Center(
-                              child: Text(
-                                "LOG IN",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                  fontSize: 21,
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                      ]),
+                            ]),
+                      ),
                     )
                   ],
                 ),
