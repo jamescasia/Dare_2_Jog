@@ -77,7 +77,7 @@ class _ReactiveButtonState extends State<ReactiveButton> {
         child: GestureDetector(
           onTapCancel: () {
             setState(() {});
-            shadowHeight = 5;
+            shadowHeight = 3;
             btnScale = 1.0;
           },
           onTapDown: (loc) {
@@ -87,7 +87,7 @@ class _ReactiveButtonState extends State<ReactiveButton> {
           },
           onTapUp: (loc) {
             setState(() {});
-            shadowHeight = 5;
+            shadowHeight = 3;
             btnScale = 1.0;
           },
           child: Material(

@@ -50,6 +50,8 @@ class LogInScreen extends StatefulWidget {
 double btnHeight = 5;
 double btnScale = 1;
 int weight_of_upper = 2;
+int weight_of_lower = 1;
+int s = 0;
 
 class _LogInScreenState extends State<LogInScreen> {
   @override
@@ -111,8 +113,8 @@ class _LogInScreenState extends State<LogInScreen> {
                                   offset: new Offset(-3, 3),
                                 ),
                                 new BoxShadow(
-                                  blurRadius: 4,
-                                  color: Colors.black12,
+                                  blurRadius: 2,
+                                  color: Colors.black26,
                                   offset: new Offset(3, 3),
                                 )
                               ],
@@ -124,7 +126,7 @@ class _LogInScreenState extends State<LogInScreen> {
                             children: <Widget>[
                               Container(
                                   width: double.infinity,
-                                  height: 56.5,
+                                  height: 57,
                                   child: Flex(
                                     direction: Axis.horizontal,
                                     children: <Widget>[
@@ -144,7 +146,8 @@ class _LogInScreenState extends State<LogInScreen> {
                                               const EdgeInsets.only(left: 18),
                                           child: TextField(
                                             onTap: () {
-                                              weight_of_upper = 0;
+                                              weight_of_upper = -1;
+                                              weight_of_lower = 1;
                                               setState(() {});
                                             },
                                             style: TextStyle(
@@ -169,7 +172,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                 padding:
                                     const EdgeInsets.only(left: 8, right: 8),
                                 child: Container(
-                                  height: 2,
+                                  height: 1,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(100)),
@@ -184,7 +187,7 @@ class _LogInScreenState extends State<LogInScreen> {
                               ),
                               Container(
                                 width: double.infinity,
-                                height: 56.5,
+                                height: 57,
                                 child: Padding(
                                   padding:
                                       const EdgeInsets.only(left: 35, top: 4),
@@ -222,7 +225,7 @@ class _LogInScreenState extends State<LogInScreen> {
               flex: weight_of_upper,
             ),
             Expanded(
-              flex: 1,
+              flex: weight_of_lower,
               child: Container(
                 child: Column(
                   children: <Widget>[
@@ -243,9 +246,9 @@ class _LogInScreenState extends State<LogInScreen> {
                               highlightColor: Colors.transparent,
                               splashColor: Colors.transparent,
                               onTap: () {
-                                print('create account now');
+                                print('create account nodw');
                               },
-                              child: Text("CREATE NOW",
+                              child: Text("CREATE NOW" ,
                                   style: TextStyle(
                                     decoration: TextDecoration.underline,
                                     fontFamily: 'Varela',
@@ -269,7 +272,15 @@ class _LogInScreenState extends State<LogInScreen> {
                                 padding: const EdgeInsets.only(bottom: 50),
                                 child: ReactiveButton(
                                   onTaps: () {
+                                    
+                                    setState(() {});
                                     print('wtf');
+                                    weight_of_upper = 2;
+                                    weight_of_lower = 1;
+                                    
+                                    s++;
+                                    
+
                                   },
                                   height: 62,
                                   width: 190,
