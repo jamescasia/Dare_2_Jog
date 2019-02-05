@@ -57,13 +57,19 @@ class LogInScreen extends StatefulWidget {
 class _LogInScreenState extends State<LogInScreen> {
   int weight_of_upper = 2;
   int weight_of_lower = 1;
+  // Container upper, lower;
+  int current = 0;
   @override
   void adjustScreen(u, l) {
     weight_of_upper = u;
     weight_of_lower = l;
     setState(() {});
   }
-  // void 
+
+  void nextScreen() {
+    current+=1;
+    setState(() {});
+  }
 
   void returnScreen(u, l) {
     weight_of_upper = u;
@@ -77,14 +83,14 @@ class _LogInScreenState extends State<LogInScreen> {
     ));
     return new Scaffold(
       resizeToAvoidBottomPadding: false,
-      body: Container( 
+      body: Container(
         height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width, 
+        width: MediaQuery.of(context).size.width,
         child: Flex(
           direction: Axis.vertical,
           children: <Widget>[
             Expanded(
-              child: Container( 
+              child: Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
                     borderRadius: new BorderRadius.only(
@@ -92,17 +98,17 @@ class _LogInScreenState extends State<LogInScreen> {
                         bottomRight: const Radius.circular(38)),
                     gradient: teal),
                 child:
-                // setGoalUpper()
-                logInScreenUpper(), 
+                (current == 0)?logInScreenUpper():(current ==1)? setGoalUpper():logInScreenUpper()
+                    // setGoalUpper()
+                    ,
               ),
               flex: weight_of_upper,
             ),
-            Expanded(
-              flex: weight_of_lower,
-              child: 
-              // setGoalLower()
-              logInScreenLower(), 
-            )
+            Expanded(flex: weight_of_lower, child:
+             (current == 0)?logInScreenLower():(current ==1)? setGoalLower():logInScreenLower()
+                // setGoalLower()
+                // logInScreenLower(),
+                )
           ],
         ),
       ),

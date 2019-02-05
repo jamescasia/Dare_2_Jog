@@ -23,6 +23,7 @@ class LogInScreen {
 
   void logInSuccessful() {
     returnScreen();
+    home.nextScreen();
   }
 
   void returnScreen(){
