@@ -6,7 +6,7 @@ import 'reactiveButton.dart';
 class LogInScreen {
   double btnHeight = 5;
   double btnScale = 1;
-  
+
   int s = 0;
   double hangTabHeight = double.infinity;
 
@@ -15,7 +15,7 @@ class LogInScreen {
   final _email_focus = FocusNode();
   final _pass_focus = FocusNode();
 
-  void logIn() { 
+  void logIn() {
     print(_email_controller.text);
     print(_pass_controller.text);
     logInSuccessful();
@@ -26,17 +26,13 @@ class LogInScreen {
     home.nextScreen();
   }
 
-  void returnScreen(){
+  void returnScreen() {
     home.returnScreen(2, 1);
-
   }
-  void adjustScreen(){
+
+  void adjustScreen() {
     home.adjustScreen(-1, 1);
-
-
   }
-
-  
 }
 
 LogInScreen logInScreen = LogInScreen();
@@ -47,8 +43,14 @@ class logInScreenUpper extends StatefulWidget {
 }
 
 class _logInScreenUpperState extends State<logInScreenUpper> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    logInScreen._email_focus.addListener(logInScreen.adjustScreen);
+    logInScreen._pass_focus.addListener(logInScreen.adjustScreen);
+  }
 
-  
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -259,7 +261,7 @@ class _logInScreenLowerState extends State<logInScreenLower> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 50),
                       child: ReactiveButton(
-                        onTaps: () { 
+                        onTaps: () {
                           logInScreen.logIn();
                         },
                         height: 55,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'main.dart'; 
+import 'main.dart';
 import 'package:intl/intl.dart';
 import 'reactiveButton.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
@@ -11,17 +11,16 @@ class setGoalUpper extends StatefulWidget {
 }
 
 class SetGoal {
-final formats = {
+  final formats = {
     InputType.both: DateFormat("EEEE, MMMM d, yyyy 'at' h:mma"),
     InputType.date: DateFormat('yyyy-MM-dd'),
     InputType.time: DateFormat("HH:mm"),
   };
 
   // Changeable in demo
-  InputType inputType = InputType.both;
+  InputType inputType = InputType.date;
   bool editable = true;
   DateTime date;
-
 
   final _kms_controller = TextEditingController();
   final _days_controller = TextEditingController();
@@ -43,6 +42,14 @@ final formats = {
 SetGoal setGoal = SetGoal();
 
 class _setGoalUpperState extends State<setGoalUpper> {
+  @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+      setGoal._kms_focus.addListener(setGoal.adjustScreen);
+      setGoal._days_focus.addListener(setGoal.adjustScreen);
+      setGoal._when_focus.addListener(setGoal.adjustScreen);
+    }
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -107,6 +114,10 @@ class _setGoalUpperState extends State<setGoalUpper> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 18),
                               child: TextField(
+                                keyboardType: TextInputType.numberWithOptions(
+                                  signed: false,
+                                  decimal: false,
+                                ),
                                 focusNode: setGoal._kms_focus,
                                 autofocus: true,
                                 onSubmitted: (content) {
@@ -192,45 +203,71 @@ class _setGoalUpperState extends State<setGoalUpper> {
                       color: Colors.grey[300],
                     ),
                   ),
+                  // Container(
+                  //     width: double.infinity,
+                  //     height: 47,
+                  //     child: Flex(
+                  //       direction: Axis.horizontal,
+                  //       children: <Widget>[
+                  //         Expanded(
+                  //           child: Padding(
+                  //             padding: const EdgeInsets.only(left: 18),
+                  //             child: TextField(
+                  //               focusNode: setGoal._when_focus,
+                  //               autofocus: true,
+                  //               onSubmitted: (content) {
+                  //                 setGoal.returnScreen();
+                  //               },
+                  //               obscureText: true,
+                  //               controller: setGoal._when_controller,
+                  //               textInputAction: TextInputAction.done,
+                  //               onTap: () {
+                  //                 setGoal.adjustScreen();
+                  //               },
+                  //               style: TextStyle(
+                  //                 color: Colors.grey,
+                  //                 fontSize: 16,
+                  //                 fontFamily: 'Varela',
+                  //               ),
+                  //               decoration: InputDecoration(
+                  //                   border: InputBorder.none,
+                  //                   hintStyle: TextStyle(
+                  //                     fontFamily: 'Varela',
+                  //                     color: Colors.grey[400],
+                  //                     fontSize: 16,
+                  //                   ),
+                  //                   hintText: 'Until when?'),
+                  //             ),
+                  //           ),
+                  //         )
+                  //       ],
+                  //     )),
+
                   Container(
-                      width: double.infinity,
-                      height: 47,
-                      child: Flex(
-                        direction: Axis.horizontal,
-                        children: <Widget>[
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 18),
-                              child: TextField(
-                                focusNode: setGoal._when_focus,
-                                autofocus: true,
-                                onSubmitted: (content) {
-                                  setGoal.returnScreen();
-                                },
-                                obscureText: true,
-                                controller: setGoal._when_controller,
-                                textInputAction: TextInputAction.done,
-                                onTap: () {
-                                  setGoal.adjustScreen();
-                                },
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 16,
-                                  fontFamily: 'Varela',
-                                ),
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintStyle: TextStyle(
-                                      fontFamily: 'Varela',
-                                      color: Colors.grey[400],
-                                      fontSize: 16,
-                                    ),
-                                    hintText: 'Until when?'),
-                              ),
-                            ),
-                          )
-                        ],
-                      )),
+                    padding: EdgeInsets.only(left: 18),
+                    height: 47,
+                    width: double.infinity,
+                    child: DateTimePickerFormField(
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 16,
+                        fontFamily: 'Varela',
+                      ),
+                      inputType: setGoal.inputType,
+                      format: setGoal.formats[setGoal.inputType],
+                      editable: setGoal.editable,
+                      decoration: InputDecoration(
+                          hasFloatingPlaceholder: false,
+                          border: InputBorder.none,
+                          hintStyle: TextStyle(
+                            fontFamily: 'Varela',
+                            color: Colors.grey[400],
+                            fontSize: 16,
+                          ),
+                          hintText: 'Until when?'),
+                      onChanged: (dt) => setState(() => setGoal.date = dt),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -247,8 +284,6 @@ class setGoalLower extends StatefulWidget {
 }
 
 class _setGoalLowerState extends State<setGoalLower> {
-
-  
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -260,15 +295,6 @@ class _setGoalLowerState extends State<setGoalLower> {
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    DateTimePickerFormField(
-                      inputType: setGoal.inputType,
-                      format: setGoal.formats[setGoal.inputType],
-                      editable: setGoal.editable,
-                      decoration: InputDecoration(
-                          labelText: 'Date/Time',
-                          hasFloatingPlaceholder: false),
-                      onChanged: (dt) => setState(() => setGoal.date = dt),
-                    ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 50),
                       child: ReactiveButton(
