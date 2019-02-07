@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'main.dart';
 import 'reactiveButton.dart';
+import 'setGoal.dart';
 
 class LogInScreen {
   double btnHeight = 5;
@@ -23,8 +24,13 @@ class LogInScreen {
 
   void logInSuccessful() {
     returnScreen();
-    home.nextScreen();
+    nextScreen(setGoalUpper(), setGoalLower());
   }
+  void nextScreen(nextScreenUpper, nextScreenLower){
+    home.nextScreen(nextScreenUpper, nextScreenLower);
+
+  }
+
 
   void returnScreen() {
     home.returnScreen(2, 1);
@@ -116,7 +122,7 @@ class _logInScreenUpperState extends State<logInScreenUpper> {
                               padding: const EdgeInsets.only(left: 18),
                               child: TextField(
                                 focusNode: logInScreen._email_focus,
-                                autofocus: true,
+                                // autofocus: true,
                                 onSubmitted: (content) {
                                   FocusScope.of(context)
                                       .requestFocus(logInScreen._pass_focus);
@@ -170,7 +176,7 @@ class _logInScreenUpperState extends State<logInScreenUpper> {
                               padding: const EdgeInsets.only(left: 18),
                               child: TextField(
                                 focusNode: logInScreen._pass_focus,
-                                autofocus: true,
+                                // autofocus: true,
                                 onSubmitted: (content) {
                                   logInScreen.returnScreen();
                                 },

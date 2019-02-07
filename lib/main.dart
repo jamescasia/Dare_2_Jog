@@ -5,29 +5,31 @@ import 'GreenSquares.dart';
 import 'loginScreen.dart';
 import 'setGoal.dart';
 
-LinearGradient teal = LinearGradient(
-  begin: Alignment.topRight,
-  end: Alignment.bottomLeft,
-  colors: [
-    const Color(0xFF63DCA0),
-    const Color(0xFF52C5A4),
-    const Color(0xFF40A1A8)
-  ],
-  tileMode: TileMode.repeated,
-);
-LinearGradient BtnTeal = LinearGradient(
-  begin: Alignment.centerRight,
-  end: Alignment.centerLeft,
-  colors: [
-    const Color(0xFF40A1A8),
-    const Color(0xFF52C5A4),
-    const Color(0xFF63DCA0),
-  ],
-  tileMode: TileMode.repeated,
-);
 void main() {
   return runApp(MyApp());
 }
+
+  LinearGradient teal = LinearGradient(
+    begin: Alignment.topRight,
+    end: Alignment.bottomLeft,
+    colors: [
+      const Color(0xFF63DCA0),
+      const Color(0xFF52C5A4),
+      const Color(0xFF40A1A8)
+    ],
+    tileMode: TileMode.repeated,
+  );
+  LinearGradient BtnTeal = LinearGradient(
+    begin: Alignment.centerRight,
+    end: Alignment.centerLeft,
+    colors: [
+      const Color(0xFF40A1A8),
+      const Color(0xFF52C5A4),
+      const Color(0xFF63DCA0),
+    ],
+    tileMode: TileMode.repeated,
+  );
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -55,6 +57,9 @@ class LogInScreen extends StatefulWidget {
 }
 
 class _LogInScreenState extends State<LogInScreen> {
+  StatefulWidget currentPageUpper= logInScreenUpper(), currentPageLower= logInScreenLower();
+
+
   int weight_of_upper = 2;
   int weight_of_lower = 1;
   // Container upper, lower;
@@ -66,8 +71,10 @@ class _LogInScreenState extends State<LogInScreen> {
     setState(() {});
   }
 
-  void nextScreen() {
-    current+=1;
+  void nextScreen(nextPageUpper, nextPageLower) {
+    currentPageUpper = nextPageUpper;
+    currentPageLower = nextPageLower;
+
     setState(() {});
   }
 
@@ -97,15 +104,11 @@ class _LogInScreenState extends State<LogInScreen> {
                         bottomLeft: const Radius.circular(38),
                         bottomRight: const Radius.circular(38)),
                     gradient: teal),
-                child:
-                (current == 0)?logInScreenUpper():(current ==1)? setGoalUpper():logInScreenUpper()
-                    // setGoalUpper()
-                    ,
+                child: currentPageUpper,
               ),
               flex: weight_of_upper,
             ),
-            Expanded(flex: weight_of_lower, child:
-             (current == 0)?logInScreenLower():(current ==1)? setGoalLower():logInScreenLower()
+            Expanded(flex: weight_of_lower, child: currentPageLower
                 // setGoalLower()
                 // logInScreenLower(),
                 )

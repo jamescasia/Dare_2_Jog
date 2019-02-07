@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'main.dart';
+import 'loginScreen.dart';
 import 'package:intl/intl.dart';
 import 'reactiveButton.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
@@ -32,6 +33,11 @@ class SetGoal {
 
   void returnScreen() {
     home.returnScreen(2, 1);
+  }
+
+  void nextScreen(nextScreenUpper, nextScreenLower){
+    home.nextScreen(nextScreenUpper, nextScreenLower);
+
   }
 
   void adjustScreen() {
@@ -119,7 +125,7 @@ class _setGoalUpperState extends State<setGoalUpper> {
                                   decimal: false,
                                 ),
                                 focusNode: setGoal._kms_focus,
-                                autofocus: true,
+                                // autofocus: true,
                                 onSubmitted: (content) {
                                   FocusScope.of(context)
                                       .requestFocus(setGoal._days_focus);
@@ -167,7 +173,7 @@ class _setGoalUpperState extends State<setGoalUpper> {
                                 // inputFormatters: TextInputFormatter() ,
 
                                 focusNode: setGoal._days_focus,
-                                autofocus: true,
+                                // autofocus: true,
                                 onSubmitted: (content) {
                                   FocusScope.of(context)
                                       .requestFocus(setGoal._when_focus);
@@ -298,7 +304,9 @@ class _setGoalLowerState extends State<setGoalLower> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 50),
                       child: ReactiveButton(
-                        onTaps: () {},
+                        onTaps: () {
+                          setGoal.nextScreen( logInScreenUpper(), logInScreenLower());
+                        },
                         height: 55,
                         width: 165,
                         bgGradient: BtnTeal,
